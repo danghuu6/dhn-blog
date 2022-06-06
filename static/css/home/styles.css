@@ -11286,3 +11286,10 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.img-test {
+    height: 250px;
+    width: 100%;
+    vertical-align: middle;
+    object-fit: cover;
+}
