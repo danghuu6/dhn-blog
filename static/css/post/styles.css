@@ -11286,3 +11286,13 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.text-content {
+    text-align: justify;
+}
+
+.comment-time {
+    opacity: 0.6;
+    font-weight: lighter;
+    font-style: italic;
+}
