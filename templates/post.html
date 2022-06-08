@@ -68,6 +68,7 @@
                                     <label for="cmt-email">Email của bạn:</label>
                                     <input type="email" name="comment-email" id="cmt-email" />
                                     <br>
+                                    <input type="hidden" value="{{ request.path }}" name="next"/>
                                     <input type="submit" value="Post Comment"/>
                                 </form>
 

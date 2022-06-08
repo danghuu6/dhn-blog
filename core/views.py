@@ -60,6 +60,7 @@ class DetailView(View):
         return render(request, 'post.html', context)
 
     def post(self, request, posts_id):
+        redirect_to = request.POST.get('next')
         p = Posts.objects.get(pk=posts_id)
 
         comment_text = request.POST.get('comment-text')
@@ -70,7 +71,6 @@ class DetailView(View):
 
         if comment:
             comment.save()
-
-        return redirect('/')
+            return redirect(redirect_to)
 
 
