@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.views import View
 from .models import Posts, Categories, Comment
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Q
 # Create your views here.
 
 
@@ -31,6 +30,16 @@ class HomeView(View):
         short_text = []
         for i in posts_new:
             short_text.append(i.content.split('\r\n')[0])
+            y = i.time.strftime('%Y')
+            m = i.time.strftime('%m')
+            d = i.time.strftime('%d')
+            i.time = d+'/'+m+'/'+y
+
+        for j in orders_paged:
+            y = j.time.strftime('%Y')
+            m = j.time.strftime('%m')
+            d = j.time.strftime('%d')
+            j.time = d + '/' + m + '/' + y
 
         context = {
             'search': search,
@@ -50,6 +59,17 @@ class DetailView(View):
         categories = Categories.objects.all()
 
         comment_list = Comment.objects.filter(posts_id=posts_id).order_by('-time')
+
+        y = p.time.strftime('%Y')
+        m = p.time.strftime('%m')
+        d = p.time.strftime('%d')
+        p.time = d+'/'+m+'/'+y
+
+        for i in comment_list:
+            y = i.time.strftime('%Y')
+            m = i.time.strftime('%m')
+            d = i.time.strftime('%d')
+            i.time = d+'/'+m+'/'+y
 
         context = {
             'comment': comment_list,
