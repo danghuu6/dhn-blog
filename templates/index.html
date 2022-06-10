@@ -1,19 +1,27 @@
 {% extends 'base.html' %}
 
+{% if view == 'cate' %}
+{% block title %} Các bài viết về {{ cate.categories_name }}{% endblock %}
+{% endif %}
+
 {% block content %}
 <!-- Page header with logo and tagline-->
-        <header class="py-5 bg-light border-bottom mb-4">
-            <div class="container">
-                <div class="text-center my-5">
-                    <h1 class="fw-bolder">Chào mừng đến với DHN Blog!</h1>
-
-                </div>
-            </div>
-        </header>
-<div class="col-lg-8">
+{% if posts.number == 1 %}
+<header class="py-5 bg-light border-bottom mb-4">
+    <div class="container">
+        <div class="text-center my-5">
+            <h1 class="fw-bolder">Chào mừng đến với DHN Blog!</h1>
+        </div>
+    </div>
+</header>
+{% endif %}
+<div class="col-lg-8 mt-5">
         <!-- Featured blog post-->
+
         {% if posts %}
         {% if search is None %}
+        {% if view != 'cate' %}
+        {% if posts.number == 1 %}
         <p class="fw-bolder">Bài viết mới nhất</p>
         <div class="card mb-4">
             <a href="{% url 'detail' posts_new.id %}"><img class="card-img-top" src="{{ posts_new.image }}" alt="..." /></a>
@@ -24,9 +32,12 @@
                 <a class="btn btn-primary" href="{% url 'detail' posts_new.id %}">Read More →</a>
             </div>
         </div>
+        {% endif %}
+        {% endif %}
+
 
         <!-- Nested row for non-featured blog posts-->
-        <p class="fw-bolder">Danh sách bài viết</p>
+        <p class="fw-bolder">Danh sách bài viết {% if cate %} về '{{ cate.categories_name }}'{% endif %}</p>
         <div class="row">
             {% for p in posts %}
             <div class="col-lg-6">
@@ -64,7 +75,7 @@
         </div>
         {% endif %}
         {% else %}
-        <p class="fw-bolder">Sorry, but nothing matched your search terms. Please try again with some different keywords.</p>
+        <p class="fw-bolder">Không có bài viết nào</p>
         {% endif %}
 
         <!-- Pagination-->

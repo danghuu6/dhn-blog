@@ -46,7 +46,7 @@ class HomeView(View):
             'posts_new': posts_new[0],
             'short_text_new': short_text[0],
             'posts': orders_paged,
-            'cate': categories,
+            'cate_list': categories,
         }
 
         return render(request, 'index.html', context)
@@ -74,7 +74,7 @@ class DetailView(View):
         context = {
             'comment': comment_list,
             'post': p,
-            'cate': categories,
+            'cate_list': categories,
         }
 
         return render(request, 'post.html', context)
@@ -94,3 +94,26 @@ class DetailView(View):
             return redirect(redirect_to)
 
 
+class CateView(View):
+    def get(self, request, categories_id):
+        p = Posts.objects.filter(categories=categories_id)
+        cate = Categories.objects.get(pk=categories_id)
+        cate_list = Categories.objects.all()
+
+        # Paging
+        paginator = Paginator(p, 6)
+        page = request.GET.get('page', 1)
+        try:
+            orders_paged = paginator.page(page)
+        except PageNotAnInteger:
+            orders_paged = paginator.page(1)
+        except EmptyPage:
+            orders_paged = paginator.page(paginator.num_pages)
+
+        context = {
+            'posts': orders_paged,
+            'cate_list': cate_list,
+            'view': 'cate',
+            'cate': cate,
+        }
+        return render(request, 'index.html', context)
