@@ -11293,3 +11293,10 @@ textarea.form-control-lg {
     vertical-align: middle;
     object-fit: cover;
 }
+
+.img-posts-new {
+    height: 350px;
+    width: 100%;
+    vertical-align: middle;
+    object-fit: cover;
+}

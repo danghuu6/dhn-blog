@@ -42,6 +42,7 @@ class HomeView(View):
             j.time = d + '/' + m + '/' + y
 
         context = {
+            'view': 'home',
             'search': search,
             'posts_new': posts_new[0],
             'short_text_new': short_text[0],

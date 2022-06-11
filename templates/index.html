@@ -1,8 +1,5 @@
 {% extends 'base.html' %}
 
-{% if view == 'cate' %}
-{% block title %} Các bài viết về {{ cate.categories_name }}{% endblock %}
-{% endif %}
 
 {% block content %}
 <!-- Page header with logo and tagline-->
@@ -24,7 +21,7 @@
         {% if posts.number == 1 %}
         <p class="fw-bolder">Bài viết mới nhất</p>
         <div class="card mb-4">
-            <a href="{% url 'detail' posts_new.id %}"><img class="card-img-top" src="{{ posts_new.image }}" alt="..." /></a>
+            <a href="{% url 'detail' posts_new.id %}"><img class="card-img-top img-posts-new" src="{{ posts_new.image }}" alt="..." /></a>
             <div class="card-body">
                 <div class="small text-muted">{{ posts_new.time }}</div>
                 <h2 class="card-title">{{ posts_new.title }}</h2>
