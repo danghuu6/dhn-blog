@@ -3,6 +3,7 @@
 
 {% block content %}
 <!-- Page header with logo and tagline-->
+{% if search is None %}
 {% if posts.number == 1 %}
 <header class="py-5 bg-light border-bottom mb-4">
     <div class="container">
@@ -11,6 +12,7 @@
         </div>
     </div>
 </header>
+{% endif %}
 {% endif %}
 <div class="col-lg-8 mt-5">
         <!-- Featured blog post-->
@@ -54,6 +56,7 @@
 
         </div>
         {% else %}
+        <p class="fw-bolder">Các bài viết được tìm thấy bởi từ khóa '{{ search }}'</p>
         <div class="row">
             {% for p in posts %}
             <div class="col-lg-6">

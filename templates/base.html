@@ -6,7 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>{% block title %}DHN Blog{% endblock %}</title>
+        <title>
+            {% block title %}
+                {% if view == 'cate' %}
+                    Các bài viết về {{ cate.categories_name }}
+                {% else %}
+                    DHN Blog
+                {% endif %}
+            {% endblock %}
+        </title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="{% static 'assets/bloglogo.png' %}" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -32,7 +40,7 @@
                     <div class="card mb-4">
                         <div class="card-header">Tìm kiếm</div>
                         <div class="card-body">
-                            <form method="get">
+                            <form method="get" action="{% url 'home' %}">
                                 <div class="input-group">
                                     <input name="search" class="form-control" type="text" placeholder="Tìm kiếm bài viết..." aria-label="Enter search term..." aria-describedby="button-search" />
                                     <button class="btn btn-primary" id="button-search" type="submit">Tìm kiếm!</button>
